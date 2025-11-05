@@ -82,7 +82,12 @@ case $option in
         ;;
     3)
         print_status "Running diagnostic tool..."
-        node diagnose-errors.js
+        if [ -f "diagnose-errors.js" ]; then
+            node diagnose-errors.js
+        else
+            print_error "diagnose-errors.js not found in current directory"
+            exit 1
+        fi
         ;;
     4)
         print_status "Performing full reset..."

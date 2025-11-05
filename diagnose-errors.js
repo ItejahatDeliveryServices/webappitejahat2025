@@ -91,28 +91,43 @@ function checkDirectory(dir, depth = 0) {
           // Check for common issues
           const issues = [];
           
-          // Check for mismatched brackets
-          const openBraces = (content.match(/\{/g) || []).length;
-          const closeBraces = (content.match(/\}/g) || []).length;
+          // Basic bracket check - this is a heuristic and may have false positives/negatives
+          // It attempts to remove strings and comments, but complex code may still cause issues
+          let cleanedContent = content;
+          try {
+            cleanedContent = content
+              .replace(/\/\/.*$/gm, '') // Remove single-line comments
+              .replace(/\/\*[\s\S]*?\*\//g, '') // Remove multi-line comments
+              .replace(/`(?:[^`\\]|\\.)*`/gs, '') // Remove template literals
+              .replace(/"(?:[^"\\]|\\.)*"/g, '') // Remove double-quoted strings
+              .replace(/'(?:[^'\\]|\\.)*'/g, ''); // Remove single-quoted strings
+          } catch (e) {
+            // If regex fails, use original content
+          }
+          
+          // Check for mismatched brackets (on cleaned content)
+          const openBraces = (cleanedContent.match(/\{/g) || []).length;
+          const closeBraces = (cleanedContent.match(/\}/g) || []).length;
           if (openBraces !== closeBraces) {
             issues.push(`Mismatched curly braces: ${openBraces} open, ${closeBraces} close`);
           }
 
-          const openParens = (content.match(/\(/g) || []).length;
-          const closeParens = (content.match(/\)/g) || []).length;
+          const openParens = (cleanedContent.match(/\(/g) || []).length;
+          const closeParens = (cleanedContent.match(/\)/g) || []).length;
           if (openParens !== closeParens) {
             issues.push(`Mismatched parentheses: ${openParens} open, ${closeParens} close`);
           }
 
-          const openBrackets = (content.match(/\[/g) || []).length;
-          const closeBrackets = (content.match(/\]/g) || []).length;
+          const openBrackets = (cleanedContent.match(/\[/g) || []).length;
+          const closeBrackets = (cleanedContent.match(/\]/g) || []).length;
           if (openBrackets !== closeBrackets) {
             issues.push(`Mismatched square brackets: ${openBrackets} open, ${closeBrackets} close`);
           }
 
           if (issues.length > 0) {
-            console.log(`\n⚠ Issues in ${fullPath}:`);
+            console.log(`\n⚠ Potential issues in ${fullPath}:`);
             issues.forEach(issue => console.log(`  - ${issue}`));
+            console.log(`  Note: This is a basic check. Verify manually for accuracy.`);
           }
         } catch (error) {
           console.log(`✗ Error reading ${fullPath}: ${error.message}`);

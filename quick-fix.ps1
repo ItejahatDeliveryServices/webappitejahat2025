@@ -68,7 +68,12 @@ switch ($option) {
     }
     "3" {
         Write-Host "▶ Running diagnostic tool..." -ForegroundColor Yellow
-        node diagnose-errors.js
+        if (Test-Path "diagnose-errors.js") {
+            node diagnose-errors.js
+        } else {
+            Write-Host "✗ diagnose-errors.js not found in current directory" -ForegroundColor Red
+            exit 1
+        }
     }
     "4" {
         Write-Host "▶ Performing full reset..." -ForegroundColor Yellow
