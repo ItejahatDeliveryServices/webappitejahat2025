@@ -1,0 +1,44 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "files.autoSave": "onFocusChange",
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "javascript.validate.enable": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.validate.enable": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.format.enable": true,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.next": true,
+    "**/.nuxt": true,
+    "**/out": true,
+    "**/.cache": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/build/**": true
+  }
+}

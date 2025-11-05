@@ -1,0 +1,22 @@
+{
+  "name": "webappitejahat2025",
+  "version": "1.0.0",
+  "description": "Web application with error troubleshooting and diagnostic tools",
+  "main": "index.js",
+  "scripts": {
+    "diagnose": "node diagnose-errors.js",
+    "help": "node diagnose-errors.js",
+    "check": "node diagnose-errors.js"
+  },
+  "keywords": [
+    "web",
+    "troubleshooting",
+    "diagnostics"
+  ],
+  "author": "ItejahatDeliveryServices",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ItejahatDeliveryServices/webappitejahat2025.git"
+  }
+}
